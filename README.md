@@ -1,4 +1,4 @@
-# Angular2 ❤ Twig
+# Angular2 &#9829; Twig
 
 This (WIP...) experiment is an attempt to add Twig templating support for Angular2
 
