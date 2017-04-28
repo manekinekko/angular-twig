@@ -1,17 +1,13 @@
 import {
   Component
-} from 'angular2/core';
+} from '@angular/core';
+import {twig} from 'twig';
 
-import {
-  PromiseWrapper
-} from 'angular2/src/facade/async';
-
-var twig: Function = (<any>window).twig;
+declare var Reflect;
 
 export function Twig(args:any={}) {
   return function TwigDecorator(cls) {
     args.template = RenderSync(args);
-    args.templateUrl = '';
     TwigComponent(args)(cls);
   };
 }
@@ -49,16 +45,16 @@ function RenderSync(args) {
 
 // Not working for now because decorators are resolved synchronously!
 function RenderAsync(args) {
-  var completer = PromiseWrapper.completer();
-  twig({
-    id: 'RenderAsync',
-    href: args.templateUrl,
-    load: (template) => {
-      let tpl = template.render(args.context);
-      console.log('annotation Twig OK');
-      completer.resolve(tpl);
-    },
-    error: completer.reject
+  return new Promise( (resolve, reject) => {
+    twig({
+      id: 'RenderAsync',
+      href: args.templateUrl,
+      load: (template) => {
+        let tpl = template.render(args.context);
+        console.log('annotation Twig OK');
+        resolve(tpl);
+      },
+      error: reject
+    });
   });
-  return completer.promise;
 }
