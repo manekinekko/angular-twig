@@ -1,16 +1,39 @@
 # Angular2 &#9829; Twig
 
-This (WIP...) experiment is an attempt to add Twig templating support for Angular2
+This (WIP...) experiment is an attempt to add Twig templating support for Angular v2+
+
+### Install
+
+```
+yarn add @manekinekko/angular-twig
+```
+
+or 
+
+```
+npm i -S @manekinekko/angular-twig
+```
+
+### Setup with Angular-cli
+
+Import the `twig` library into your `.angular-cli.json` file:
+
+```json
+"scripts": [
+		"../node_modules/twig/twig.min.js"
+	],
+```
 
 ### How to use
 
 ```javascript
-import {Twig} from 'angular2-twig';
+import { Twig } from '@manekinekko/angular-twig';
 ```
 
-The `@Twig` decorator supersedes the `@Component()` decorator.
+The `@Twig` decorator supersedes the `@Component()` decorator. **Don't use both!**
 
 #### Use a `templateUrl`
+
 ```javascript
 @Twig({
 	templateUrl: 'templates/field--comment.html.twig',
@@ -50,7 +73,6 @@ export class AppComponent {}
 })
 export class AppComponent {}
 ```
-
 
 ### Live Example
 
